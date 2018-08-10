@@ -11,14 +11,15 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         intent = new Intent(MainActivity.this, FloatingService.class);
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M){
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             startService(intent);
-        }else {
+        } else {
             startFloatingService();
         }
 
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void startFloatingService() {
-        if (ActivityUtil.isServiceWork(this, "com.demon.suspensionbox.FloatingService")) {
+        if (ActivityUtil.isServiceWork(this, "com.demon.suspensionbox.FloatingService")) {//防止重复启动
             Toast.makeText(this, "已启动！", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
             startService(intent);
         }
     }
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

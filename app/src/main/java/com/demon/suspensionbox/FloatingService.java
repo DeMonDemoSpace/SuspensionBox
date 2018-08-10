@@ -32,7 +32,7 @@ public class FloatingService extends Service {
         }
         layoutParams.format = PixelFormat.RGBA_8888;
         layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
-        //layoutParams.gravity = Gravity.RIGHT;//悬浮框在布局的位置
+        layoutParams.gravity = Gravity.LEFT;//悬浮框在布局的位置
         layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;//悬浮窗的宽，不指定则无法滑动
         layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;//悬浮窗的高，不指定则无法滑动
         //layoutParams.x = 0; //初始位置的x坐标
@@ -73,7 +73,6 @@ public class FloatingService extends Service {
     private void showFloatingWindow() {
         windowManager.addView(floatView, layoutParams);
         floatView.setOnTouchListener(new FloatingOnTouchListener());
-
     }
 
     private class FloatingOnTouchListener implements View.OnTouchListener {
@@ -96,7 +95,7 @@ public class FloatingService extends Service {
                     y = nowY;
                     layoutParams.x = layoutParams.x + movedX;
                     layoutParams.y = layoutParams.y + movedY;
-                    Log.i(TAG, "onTouch: " + layoutParams.x + " " + layoutParams.y);
+                    //Log.i(TAG, "onTouch: " + layoutParams.x + " " + layoutParams.y);
                     windowManager.updateViewLayout(view, layoutParams);
                     break;
                 default:
